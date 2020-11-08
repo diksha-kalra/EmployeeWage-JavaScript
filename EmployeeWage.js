@@ -16,6 +16,7 @@ const IS_FULL_TIME=2;
 const PART_TIME_HRS=4;
 const FULL_TIME_HRS=8;
 const WAGE_PER_HR=20;
+const NUM_OF_WORKING_DAYS=20;
 
 //function to get working hrs
 function getWorkingHours(empCheck){
@@ -31,9 +32,13 @@ function getWorkingHours(empCheck){
     }
 }
 let empHrs=0;
-let empCheck=Math.floor(Math.random()*10)%3;
-empHrs=getWorkingHours(empCheck);
+//calculating wages for a month
+for(let day=0; day<NUM_OF_WORKING_DAYS;day++){
+    let empCheck=Math.floor(Math.random()*10)%3;
+    empHrs+=getWorkingHours(empCheck);
+}
 let empWage=empHrs*WAGE_PER_HR;
-console.log("UC3 Employee Wage: "+empWage);
+console.log("UC4 Total Employee Wage: "+empWage);
+
 
 
