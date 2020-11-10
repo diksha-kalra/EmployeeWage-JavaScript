@@ -38,10 +38,6 @@ const calculateDailyWage=(empHrs)=>{
     return empHrs*WAGE_PER_HR;
 }
 
-const findTotal=(totalWage, dailyWage)=>{
-    return totalWage+dailyWage;
-}
-
 let totalEmpHrs=0;
 let totalWorkingDays=0;
 let empDailyHrsAndWageArr=new Array();
@@ -63,3 +59,26 @@ while(totalEmpHrs<=TOTAL_WORKING_HRS && totalWorkingDays<NUM_OF_WORKING_DAYS){
     });
 }
 console.log("UC 10 daily Hrs and Wage Earned: "+empDailyHrsAndWageArr);
+
+//UC11 Performing operations using arrow functions on object
+//UC 11A- calculate total wage and total hours worked
+let totalWage=empDailyHrsAndWageArr.filter(dailyHrsAndWage=>dailyHrsAndWage.dailyWage>0)
+                                   .reduce((totalWage,dailyHrsAndWage)=>totalWage+=dailyHrsAndWage.dailyWage,0);
+let totalHrs=empDailyHrsAndWageArr.filter(dailyHrsAndWage=>dailyHrsAndWage.dailyhrs>0)
+                                  .reduce((totalHrs,dailyHrsAndWage)=>totalHrs+=dailyHrsAndWage.dailyhrs,0);
+console.log("UC 11A- Totalhrs: "+totalHrs+" Total Wage: "+totalWage);
+
+//UC 11B- show full working days using for Each
+process.stdout.write("UC 11B Logging Full Work Days");
+empDailyHrsAndWageArr.filter(dailyHrsAndWage=>dailyHrsAndWage.dailyhrs==8)
+                     .forEach(dailyHrsAndWage=>process.stdout.write(dailyHrsAndWage.toString()));
+
+//UC 11C- show part working days using map by reducing to string array
+let partWorkingDayArray=empDailyHrsAndWageArr.filter(dailyHrsAndWage=>dailyHrsAndWage.dailyhrs==4)
+                                             .map(dailyHrsAndWage=>dailyHrsAndWage.toString());
+console.log("\n UC 11C- part working days: "+partWorkingDayArray);
+
+//UC 11D- non working days using map functions
+let nonWorkingDaysNum=empDailyHrsAndWageArr.filter(dailyHrsAndWage=>dailyHrsAndWage.dailyhrs==0)
+                                             .map(dailyHrsAndWage=>dailyHrsAndWage.dayNumber);
+console.log("UC 11D- non working days number: "+nonWorkingDaysNum);
